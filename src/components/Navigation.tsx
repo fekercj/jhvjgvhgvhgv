@@ -49,8 +49,8 @@ const Navigation = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors relative group ${
                   location.pathname === link.path
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
+                    ? "text-accent"
+                    : "text-primary-light hover:text-accent"
                 }`}
               >
                 {link.name}
@@ -89,8 +89,8 @@ const Navigation = () => {
                 to={link.path}
                 className={`block py-3 text-sm font-medium transition-colors ${
                   location.pathname === link.path
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
+                    ? "text-accent"
+                    : "text-primary-light hover:text-accent"
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
