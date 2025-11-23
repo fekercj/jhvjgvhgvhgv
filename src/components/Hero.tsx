@@ -6,8 +6,15 @@ import heroBg from "@/assets/hero-bg.jpg";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with Gradient */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-navy via-primary-dark to-navy" />
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={heroBg} 
+          alt="Hero Background" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-primary-dark/90 to-navy/95" />
+      </div>
 
       {/* Animated Grid Pattern */}
       <div className="absolute inset-0 z-0 opacity-10">

@@ -50,12 +50,14 @@ const Navigation = () => {
                 className={`text-sm font-medium transition-colors relative group ${
                   location.pathname === link.path
                     ? "text-accent"
-                    : "text-primary-light hover:text-accent"
+                    : isScrolled 
+                      ? "text-foreground hover:text-accent" 
+                      : "text-white hover:text-accent"
                 }`}
               >
                 {link.name}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
                     location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -82,7 +84,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+          <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/95 backdrop-blur-md">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -90,7 +92,7 @@ const Navigation = () => {
                 className={`block py-3 text-sm font-medium transition-colors ${
                   location.pathname === link.path
                     ? "text-accent"
-                    : "text-primary-light hover:text-accent"
+                    : "text-foreground hover:text-accent"
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
