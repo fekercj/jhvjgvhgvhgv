@@ -17,13 +17,19 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Products", path: "/products" },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", id: "about" },
+    { name: "Work", id: "portfolio" },
+    { name: "Team", id: "team" },
+    { name: "Contact", id: "contact" },
   ];
 
   return (
@@ -44,26 +50,24 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
                 className={`text-sm font-medium transition-colors relative group ${
-                  location.pathname === link.path
-                    ? "text-accent"
-                    : isScrolled 
-                      ? "text-foreground hover:text-accent" 
-                      : "text-white hover:text-accent"
+                  isScrolled 
+                    ? "text-foreground hover:text-accent" 
+                    : "text-white hover:text-accent"
                 }`}
               >
                 {link.name}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
-                    location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
-                />
-              </Link>
+                <span className="absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 w-0 group-hover:w-full" />
+              </button>
             ))}
-            <Button variant="default" className="bg-accent hover:bg-accent-hover text-accent-foreground">
+            <Button 
+              variant="default" 
+              className="bg-accent hover:bg-accent-hover text-accent-foreground"
+              onClick={() => scrollToSection("contact")}
+            >
               Get Started
             </Button>
           </div>
@@ -86,22 +90,18 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/95 backdrop-blur-md">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`block py-3 text-sm font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? "text-accent"
-                    : "text-foreground hover:text-accent"
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className="block py-3 text-sm font-medium transition-colors text-foreground hover:text-accent w-full text-left"
               >
                 {link.name}
-              </Link>
+              </button>
             ))}
             <Button
               variant="default"
               className="w-full mt-4 bg-accent hover:bg-accent-hover text-accent-foreground"
+              onClick={() => scrollToSection("contact")}
             >
               Get Started
             </Button>
